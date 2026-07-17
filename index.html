@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HF Sites — конструктор сайтов</title>
     <style>
-        /* ── ОСНОВНЫЕ СТИЛИ ── */
         * {
             margin: 0;
             padding: 0;
@@ -20,7 +19,6 @@
             padding: 20px;
         }
 
-        /* ── ШАПКА ── */
         .header {
             max-width: 1400px;
             margin: 0 auto 25px;
@@ -98,17 +96,6 @@
             transform: translateY(-2px);
         }
 
-        .btn-success {
-            background: #065f46;
-            color: #fff;
-        }
-
-        .btn-success:hover {
-            background: #047857;
-            transform: translateY(-2px);
-        }
-
-        /* ── СТАТИСТИКА ── */
         .stats-bar {
             max-width: 1400px;
             margin: 0 auto 25px;
@@ -145,7 +132,6 @@
             margin-top: 2px;
         }
 
-        /* ── ОСНОВНАЯ СЕТКА ── */
         .main-grid {
             max-width: 1400px;
             margin: 0 auto;
@@ -160,7 +146,6 @@
             }
         }
 
-        /* ── ЛЕВАЯ КОЛОНКА ── */
         .editor-panel {
             background: #14141e;
             border: 1px solid #2a2a3a;
@@ -198,7 +183,6 @@
             color: #fff;
         }
 
-        /* ── НАСТРОЙКИ САЙТА ── */
         .site-settings {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -225,7 +209,85 @@
             color: #4a4a5a;
         }
 
-        /* ── ЗАГРУЗКА ФАЙЛОВ ── */
+        /* ── ВИЗУАЛЬНЫЙ РЕДАКТОР ── */
+        .visual-editor {
+            border: 1px solid #2a2a3a;
+            border-radius: 10px;
+            padding: 16px;
+            min-height: 300px;
+            background: #0d0d14;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .visual-editor .placeholder {
+            color: #4a4a5a;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .visual-editor .placeholder .icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+
+        .visual-editor .toolbar {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #2a2a3a;
+        }
+
+        .visual-editor .toolbar button {
+            padding: 6px 14px;
+            border-radius: 6px;
+            border: 1px solid #2a2a3a;
+            background: transparent;
+            color: #a0a0b0;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+
+        .visual-editor .toolbar button:hover {
+            background: #2a2a3a;
+            color: #fff;
+        }
+
+        .visual-editor .toolbar button.active {
+            background: #2a2a3a;
+            color: #fff;
+            border-color: #f5576c;
+        }
+
+        .visual-editor .content-area {
+            min-height: 200px;
+            padding: 12px;
+            background: #fff;
+            border-radius: 8px;
+            color: #333;
+        }
+
+        .visual-editor .content-area:empty::before {
+            content: "Нажмите на блок выше, чтобы добавить контент";
+            color: #999;
+            font-style: italic;
+        }
+
+        .visual-editor .content-area img,
+        .visual-editor .content-area video {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 8px 0;
+        }
+
+        .visual-editor .content-area audio {
+            width: 100%;
+            margin: 8px 0;
+        }
+
         .file-upload-area {
             border: 2px dashed #2a2a3a;
             border-radius: 10px;
@@ -267,7 +329,6 @@
             margin-top: 6px;
         }
 
-        /* ── GITHUB ИМПОРТ ── */
         .github-import {
             display: flex;
             gap: 10px;
@@ -322,12 +383,17 @@
             resize: vertical;
             line-height: 1.6;
             transition: border-color 0.2s;
+            display: none;
         }
 
         textarea:focus {
             outline: none;
             border-color: #f5576c;
             box-shadow: 0 0 0 3px rgba(245, 87, 108, 0.1);
+        }
+
+        textarea.visible {
+            display: block;
         }
 
         .editor-actions {
@@ -374,7 +440,15 @@
             background: #3a3a4a;
         }
 
-        /* ── ПРАВАЯ КОЛОНКА ── */
+        .btn-edit {
+            background: #1a3a5a;
+            color: #fff;
+        }
+
+        .btn-edit:hover {
+            background: #2a4a6a;
+        }
+
         .projects-panel {
             background: #14141e;
             border: 1px solid #2a2a3a;
@@ -439,6 +513,10 @@
             cursor: pointer;
         }
 
+        .project-item .info:hover .name {
+            color: #f093fb;
+        }
+
         .project-item .name {
             font-weight: 600;
             color: #e5e5e5;
@@ -446,6 +524,7 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            transition: color 0.2s;
         }
 
         .project-item .url {
@@ -484,6 +563,11 @@
             color: #fca5a5;
         }
 
+        .project-item .actions .edit:hover {
+            background: #1a3a5a;
+            color: #60a5fa;
+        }
+
         .project-item .status {
             width: 8px;
             height: 8px;
@@ -493,7 +577,6 @@
             margin-left: 8px;
         }
 
-        /* ── РЕЗУЛЬТАТ ── */
         #result {
             margin-top: 14px;
             padding: 12px 16px;
@@ -558,7 +641,6 @@
             font-size: 13px;
         }
 
-        /* ── МОДАЛКА ── */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -612,7 +694,6 @@
             transition: all 0.2s;
         }
 
-        /* ── АДАПТИВ ── */
         @media (max-width: 600px) {
             .header {
                 padding: 12px 16px;
@@ -623,17 +704,22 @@
             .stats-bar {
                 grid-template-columns: 1fr 1fr;
             }
-            .editor-panel, .projects-panel {
+            .editor-panel,
+            .projects-panel {
                 padding: 16px;
-            }
-            textarea {
-                height: 200px;
             }
             .site-settings {
                 grid-template-columns: 1fr;
             }
             .github-import {
                 flex-direction: column;
+            }
+            .visual-editor .toolbar {
+                gap: 4px;
+            }
+            .visual-editor .toolbar button {
+                font-size: 11px;
+                padding: 4px 10px;
             }
         }
     </style>
@@ -676,9 +762,8 @@
         <!-- ЛЕВАЯ КОЛОНКА -->
         <div class="editor-panel">
             <div class="tabs">
-                <button class="active" onclick="switchTab('code')">📝 Код</button>
-                <button onclick="switchTab('preview')">👁️ Превью</button>
-                <button onclick="switchTab('blocks')">🧩 Блоки</button>
+                <button class="active" onclick="switchTab('visual')">🎨 Визуальный</button>
+                <button onclick="switchTab('code')">📝 Код</button>
             </div>
 
             <!-- Настройки сайта -->
@@ -687,12 +772,35 @@
                 <input type="text" id="customId" placeholder="Свой ID (например: my-site)" />
             </div>
 
-            <!-- ЗАГРУЗКА ФАЙЛА -->
-            <div class="file-upload-area" id="dropZone" onclick="document.getElementById('fileInput').click()">
+            <!-- ВИЗУАЛЬНЫЙ РЕДАКТОР -->
+            <div id="visualEditor" class="visual-editor">
+                <div class="toolbar">
+                    <button onclick="addVisualBlock('text')">📝 Текст</button>
+                    <button onclick="addVisualBlock('heading')">📰 Заголовок</button>
+                    <button onclick="addVisualBlock('image')">🖼️ Картинка</button>
+                    <button onclick="addVisualBlock('video')">🎬 Видео</button>
+                    <button onclick="addVisualBlock('audio')">🎵 Аудио</button>
+                    <button onclick="addVisualBlock('button')">🔘 Кнопка</button>
+                    <button onclick="addVisualBlock('divider')">➖ Разделитель</button>
+                    <button onclick="addVisualBlock('gallery')">🎠 Галерея</button>
+                    <button onclick="addVisualBlock('card')">🃏 Карточка</button>
+                    <button onclick="addVisualBlock('list')">📋 Список</button>
+                    <button onclick="clearVisual()" style="border-color:#7f1d1d; color:#fca5a5;">🗑️ Очистить</button>
+                </div>
+                <div class="content-area" id="visualContent" contenteditable="true">
+                    <p style="color:#999; font-style:italic; text-align:center; padding:40px 20px;">
+                        Нажмите на кнопку выше, чтобы добавить контент<br>
+                        Или перетащите файлы сюда
+                    </p>
+                </div>
+            </div>
+
+            <!-- ЗАГРУЗКА МЕДИА -->
+            <div class="file-upload-area" id="dropZone" onclick="document.getElementById('mediaInput').click()">
                 <div class="icon">📁</div>
-                <p>Нажми или перетащи файл <strong>.html</strong></p>
-                <div class="file-name" id="fileName"></div>
-                <input type="file" id="fileInput" accept=".html,.htm" />
+                <p>Перетащи файлы: <strong>PNG, JPG, MP4, MP3</strong></p>
+                <div class="file-name" id="mediaFileName"></div>
+                <input type="file" id="mediaInput" accept=".png,.jpg,.jpeg,.gif,.mp4,.mp3" multiple />
             </div>
 
             <!-- GITHUB ИМПОРТ -->
@@ -716,24 +824,6 @@
 </body>
 </html></textarea>
 
-            <div id="previewContainer" style="display:none; height:320px; border:1px solid #2a2a3a; border-radius:10px; overflow:hidden; background:#fff;">
-                <iframe id="previewFrame" style="width:100%; height:100%; border:none;"></iframe>
-            </div>
-
-            <!-- Блоки контента -->
-            <div id="blocksContainer" style="display:none; padding: 10px 0;">
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-                    <button class="btn-preview" onclick="insertBlock('text')" style="padding:12px;">📝 Текст</button>
-                    <button class="btn-preview" onclick="insertBlock('image')" style="padding:12px;">🖼️ Картинка</button>
-                    <button class="btn-preview" onclick="insertBlock('button')" style="padding:12px;">🔘 Кнопка</button>
-                    <button class="btn-preview" onclick="insertBlock('divider')" style="padding:12px;">➖ Разделитель</button>
-                    <button class="btn-preview" onclick="insertBlock('gallery')" style="padding:12px;">🎠 Галерея</button>
-                    <button class="btn-preview" onclick="insertBlock('video')" style="padding:12px;">🎬 Видео</button>
-                    <button class="btn-preview" onclick="insertBlock('card')" style="padding:12px;">🃏 Карточка</button>
-                    <button class="btn-preview" onclick="insertBlock('list')" style="padding:12px;">📋 Список</button>
-                </div>
-            </div>
-
             <div class="editor-actions">
                 <button class="btn-deploy" id="deployBtn" onclick="deploy()">
                     🚀 Деплоить
@@ -741,8 +831,8 @@
                 <button class="btn-preview" onclick="preview()">
                     👁️ Превью
                 </button>
-                <button class="btn-preview" onclick="clearEditor()">
-                    🗑️ Очистить
+                <button class="btn-edit" onclick="syncVisualToCode()">
+                    💾 Сохранить в код
                 </button>
             </div>
 
@@ -778,6 +868,18 @@
         </div>
     </div>
 
+    <!-- ═══ МОДАЛКА РЕДАКТИРОВАНИЯ ═══ -->
+    <div class="modal-overlay" id="editModal">
+        <div class="modal">
+            <h3>✏️ Редактировать сайт</h3>
+            <p>Код сайта загружен в редактор. Отредактируйте его и нажмите "Деплоить".</p>
+            <div class="buttons">
+                <button class="btn-ghost" onclick="closeEditModal()">Закрыть</button>
+                <button class="btn-primary" onclick="closeEditModal(); document.getElementById('deployBtn').click();">🚀 Деплоить</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // ─── КОНФИГ ───
         const SUPABASE_URL = 'https://uojitzszwmugkzecwdbt.supabase.co';
@@ -791,44 +893,201 @@
         const projectCounter = document.getElementById('projectCounter');
         const projectCount = document.getElementById('projectCount');
         const deployCount = document.getElementById('deployCount');
-        const previewContainer = document.getElementById('previewContainer');
-        const previewFrame = document.getElementById('previewFrame');
         const siteName = document.getElementById('siteName');
         const customId = document.getElementById('customId');
         const deleteModal = document.getElementById('deleteModal');
         const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
-        const fileInput = document.getElementById('fileInput');
-        const fileName = document.getElementById('fileName');
+        const editModal = document.getElementById('editModal');
+        const mediaInput = document.getElementById('mediaInput');
+        const mediaFileName = document.getElementById('mediaFileName');
         const dropZone = document.getElementById('dropZone');
         const githubUrl = document.getElementById('githubUrl');
+        const visualContent = document.getElementById('visualContent');
+        const visualEditor = document.getElementById('visualEditor');
 
         let allProjects = [];
         let deployCounter = 0;
         let deleteTargetId = null;
-        let uploadedFileName = '';
+        let editingProjectId = null;
 
-        // ─── БЛОКИ КОНТЕНТА ───
-        const blocks = {
-            text: '<p style="font-size:18px; line-height:1.8; color:#333; max-width:600px; margin:0 auto;">Ваш текст здесь. Вы можете редактировать этот блок.</p>',
-            image: '<img src="https://via.placeholder.com/600x400" alt="Изображение" style="max-width:100%; border-radius:8px; margin:10px 0;" />',
-            button: '<a href="#" style="display:inline-block; padding:12px 30px; background:linear-gradient(135deg, #f093fb, #f5576c); color:#fff; border-radius:8px; text-decoration:none; font-weight:600; margin:10px 0;">Кнопка</a>',
-            divider: '<hr style="border:1px solid #ddd; margin:20px 0;" />',
-            gallery: '<div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:10px 0;"><img src="https://via.placeholder.com/200x150" style="width:100%; border-radius:6px;" /><img src="https://via.placeholder.com/200x150" style="width:100%; border-radius:6px;" /><img src="https://via.placeholder.com/200x150" style="width:100%; border-radius:6px;" /></div>',
-            video: '<div style="position:relative; padding-bottom:56.25%; margin:10px 0;"><iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" style="position:absolute; top:0; left:0; width:100%; height:100%; border:none; border-radius:8px;"></iframe></div>',
-            card: '<div style="background:#f8f9fa; border-radius:12px; padding:20px; margin:10px 0; box-shadow:0 2px 8px rgba(0,0,0,0.1);"><h3 style="margin-bottom:8px;">Заголовок карточки</h3><p style="color:#666;">Текст карточки. Можно описать что угодно.</p></div>',
-            list: '<ul style="text-align:left; max-width:400px; margin:10px auto; color:#333; font-size:16px; line-height:2;"><li>Пункт 1</li><li>Пункт 2</li><li>Пункт 3</li></ul>'
-        };
+        // ─── ВИЗУАЛЬНЫЙ РЕДАКТОР ───
 
-        function insertBlock(type) {
-            const block = blocks[type] || '';
-            const cursor = codeTextarea.selectionStart;
-            const text = codeTextarea.value;
-            codeTextarea.value = text.slice(0, cursor) + '\n' + block + '\n' + text.slice(cursor);
-            codeTextarea.focus();
-            const newCursor = cursor + block.length + 2;
-            codeTextarea.setSelectionRange(newCursor, newCursor);
-            showResult(`✅ Блок "${type}" вставлен!`, 'success');
-            setTimeout(() => resultDiv.style.display = 'none', 1500);
+        function addVisualBlock(type) {
+            const blocks = {
+                text: '<p style="font-size:16px; line-height:1.8; color:#333; max-width:600px; margin:10px auto;">Ваш текст здесь. Вы можете его редактировать.</p>',
+                heading: '<h2 style="font-size:28px; color:#222; margin:10px 0;">Заголовок</h2>',
+                image: '<img src="https://via.placeholder.com/600x400" alt="Изображение" style="max-width:100%; border-radius:8px; margin:10px 0;" />',
+                video: '<video controls style="max-width:100%; border-radius:8px; margin:10px 0;"><source src="#" type="video/mp4">Ваш браузер не поддерживает видео</video>',
+                audio: '<audio controls style="width:100%; margin:10px 0;"><source src="#" type="audio/mpeg">Ваш браузер не поддерживает аудио</audio>',
+                button: '<a href="#" style="display:inline-block; padding:12px 30px; background:linear-gradient(135deg, #f093fb, #f5576c); color:#fff; border-radius:8px; text-decoration:none; font-weight:600; margin:10px 0;">Кнопка</a>',
+                divider: '<hr style="border:1px solid #ddd; margin:20px 0;" />',
+                gallery: '<div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:10px 0;"><img src="https://via.placeholder.com/200x150" style="width:100%; border-radius:6px;" /><img src="https://via.placeholder.com/200x150" style="width:100%; border-radius:6px;" /><img src="https://via.placeholder.com/200x150" style="width:100%; border-radius:6px;" /></div>',
+                card: '<div style="background:#f8f9fa; border-radius:12px; padding:20px; margin:10px 0; box-shadow:0 2px 8px rgba(0,0,0,0.1);"><h3 style="margin-bottom:8px;">Заголовок карточки</h3><p style="color:#666;">Текст карточки. Можно описать что угодно.</p></div>',
+                list: '<ul style="text-align:left; max-width:400px; margin:10px auto; color:#333; font-size:16px; line-height:2;"><li>Пункт 1</li><li>Пункт 2</li><li>Пункт 3</li></ul>'
+            };
+
+            // Убираем плейсхолдер
+            if (visualContent.innerHTML.includes('Нажмите на кнопку выше')) {
+                visualContent.innerHTML = '';
+            }
+
+            visualContent.innerHTML += blocks[type] || '';
+            syncVisualToCode();
+        }
+
+        function clearVisual() {
+            visualContent.innerHTML = `
+                <p style="color:#999; font-style:italic; text-align:center; padding:40px 20px;">
+                    Нажмите на кнопку выше, чтобы добавить контент<br>
+                    Или перетащите файлы сюда
+                </p>
+            `;
+            syncVisualToCode();
+        }
+
+        function syncVisualToCode() {
+            const html = visualContent.innerHTML;
+            if (html.includes('Нажмите на кнопку выше')) {
+                return;
+            }
+            // Создаём полный HTML документ
+            const fullHtml = `<!DOCTYPE html>
+        <html>
+        <head>
+            <title>${siteName.value || 'Мой сайт'}</title>
+            <style>
+                body { font-family: Arial; text-align: center; padding: 40px 20px; background: #f5f5f5; color: #333; max-width: 900px; margin: 0 auto; }
+                * { box-sizing: border-box; }
+            </style>
+        </head>
+        <body>
+            ${html}
+        </body>
+        </html>`;
+            codeTextarea.value = fullHtml;
+        }
+
+        // ─── ЗАГРУЗКА МЕДИА ───
+        mediaInput.addEventListener('change', (e) => {
+            const files = e.target.files;
+            for (let file of files) {
+                handleMediaFile(file);
+            }
+            mediaInput.value = '';
+        });
+
+        // Drag and Drop для медиа
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragover');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            for (let file of files) {
+                handleMediaFile(file);
+            }
+        });
+
+        function handleMediaFile(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const dataUrl = e.target.result;
+
+                // Убираем плейсхолдер
+                if (visualContent.innerHTML.includes('Нажмите на кнопку выше')) {
+                    visualContent.innerHTML = '';
+                }
+
+                if (file.type.startsWith('image/')) {
+                    visualContent.innerHTML += `<img src="${dataUrl}" alt="${file.name}" style="max-width:100%; border-radius:8px; margin:10px 0;" />`;
+                } else if (file.type.startsWith('video/')) {
+                    visualContent.innerHTML += `
+                        <video controls style="max-width:100%; border-radius:8px; margin:10px 0;">
+                            <source src="${dataUrl}" type="${file.type}">
+                            Ваш браузер не поддерживает видео
+                        </video>
+                    `;
+                } else if (file.type.startsWith('audio/')) {
+                    visualContent.innerHTML += `
+                        <audio controls style="width:100%; margin:10px 0;">
+                            <source src="${dataUrl}" type="${file.type}">
+                            Ваш браузер не поддерживает аудио
+                        </audio>
+                    `;
+                }
+
+                mediaFileName.textContent = `📄 Загружено: ${file.name}`;
+                syncVisualToCode();
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // ─── ЗАГРУЗКА HTML ФАЙЛА ───
+        const htmlFileInput = document.createElement('input');
+        htmlFileInput.type = 'file';
+        htmlFileInput.accept = '.html,.htm';
+        htmlFileInput.style.display = 'none';
+        document.body.appendChild(htmlFileInput);
+
+        htmlFileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                codeTextarea.value = e.target.result;
+                siteName.value = file.name.replace('.html', '').replace('.htm', '');
+                showResult(`✅ Файл "${file.name}" загружен!`, 'success');
+                setTimeout(() => resultDiv.style.display = 'none', 2000);
+                // Обновляем визуальный редактор
+                updateVisualFromCode();
+            };
+            reader.readAsText(file);
+        });
+
+        // Обновляем визуал из кода
+        function updateVisualFromCode() {
+            const html = codeTextarea.value;
+            const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+            if (bodyMatch) {
+                visualContent.innerHTML = bodyMatch[1];
+                // Убираем плейсхолдер если есть контент
+                if (visualContent.innerHTML.trim() && !visualContent.innerHTML.includes('Нажмите на кнопку выше')) {
+                    // OK
+                }
+            }
+        }
+
+        // ─── ИМПОРТ ИЗ GITHUB ───
+        async function importFromGitHub() {
+            const url = githubUrl.value.trim();
+            if (!url) {
+                showResult('❌ Введите ссылку на GitHub файл (raw)', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Не удалось загрузить файл');
+                const html = await response.text();
+
+                const nameMatch = url.match(/\/([^\/]+)\.html$/);
+                const name = nameMatch ? nameMatch[1] : 'Импорт';
+
+                codeTextarea.value = html;
+                siteName.value = name;
+                updateVisualFromCode();
+                showResult(`✅ Файл из GitHub загружен!`, 'success');
+                setTimeout(() => resultDiv.style.display = 'none', 2000);
+            } catch (error) {
+                showResult(`❌ Ошибка: ${error.message}`, 'error');
+            }
         }
 
         // ─── ЗАГРУЗКА ПРОЕКТОВ ───
@@ -874,17 +1133,17 @@
                     day: '2-digit', month: '2-digit', year: '2-digit',
                     hour: '2-digit', minute: '2-digit'
                 });
-                // Извлекаем название из <title> или берём первые символы
                 const titleMatch = p.html_content.match(/<title>([^<]*)<\/title>/);
                 const displayName = titleMatch ? titleMatch[1] : p.html_content.replace(/<[^>]*>/g, '').slice(0, 40) + '...';
 
                 return `
                     <div class="project-item">
-                        <div class="info" onclick="window.open('${url}', '_blank')">
+                        <div class="info" onclick="openProject('${p.id}')">
                             <div class="name">${displayName}</div>
                             <div class="url">${url}</div>
                         </div>
                         <div class="actions">
+                            <button onclick="editProject('${p.id}')" title="Редактировать" class="edit">✏️</button>
                             <button onclick="copyUrl('${url}')" title="Копировать ссылку">📋</button>
                             <button class="delete" onclick="confirmDelete('${p.id}')" title="Удалить">🗑️</button>
                         </div>
@@ -894,6 +1153,42 @@
             }).join('');
 
             projectCounter.textContent = projects.length;
+        }
+
+        // ─── ОТКРЫТЬ ПРОЕКТ ───
+        function openProject(id) {
+            const url = `${window.location.origin}/page/${id}`;
+            window.open(url, '_blank');
+        }
+
+        // ─── РЕДАКТИРОВАТЬ ПРОЕКТ ───
+        function editProject(id) {
+            const project = allProjects.find(p => p.id === id);
+            if (!project) {
+                showResult('❌ Проект не найден', 'error');
+                return;
+            }
+
+            codeTextarea.value = project.html_content;
+            editingProjectId = id;
+            updateVisualFromCode();
+
+            // Извлекаем название
+            const titleMatch = project.html_content.match(/<title>([^<]*)<\/title>/);
+            if (titleMatch) {
+                siteName.value = titleMatch[1];
+            }
+
+            showResult(`✏️ Проект загружен для редактирования!`, 'success');
+            setTimeout(() => resultDiv.style.display = 'none', 2000);
+
+            // Показываем модалку
+            editModal.classList.add('active');
+        }
+
+        function closeEditModal() {
+            editModal.classList.remove('active');
+            editingProjectId = null;
         }
 
         // ─── ОБНОВЛЕНИЕ СТАТИСТИКИ ───
@@ -933,7 +1228,10 @@
                     }
                 });
 
-                if (!response.ok) throw new Error('Не удалось удалить');
+                if (!response.ok) {
+                    const err = await response.json();
+                    throw new Error(err.message || 'Не удалось удалить');
+                }
 
                 showResult('✅ Сайт успешно удалён!', 'success');
                 closeDeleteModal();
@@ -942,75 +1240,6 @@
                 showResult(`❌ Ошибка: ${error.message}`, 'error');
             }
         });
-
-        // ─── ЗАГРУЗКА ФАЙЛА ───
-        fileInput.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-            handleFile(file);
-        });
-
-        // Drag and Drop
-        dropZone.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            dropZone.classList.add('dragover');
-        });
-
-        dropZone.addEventListener('dragleave', () => {
-            dropZone.classList.remove('dragover');
-        });
-
-        dropZone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            dropZone.classList.remove('dragover');
-            const file = e.dataTransfer.files[0];
-            if (file) handleFile(file);
-        });
-
-        function handleFile(file) {
-            if (!file.name.endsWith('.html') && !file.name.endsWith('.htm')) {
-                showResult('❌ Пожалуйста, загрузите HTML-файл', 'error');
-                return;
-            }
-
-            fileName.textContent = `📄 ${file.name}`;
-            uploadedFileName = file.name.replace('.html', '').replace('.htm', '');
-
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                codeTextarea.value = e.target.result;
-                siteName.value = uploadedFileName || 'Новый сайт';
-                showResult(`✅ Файл "${file.name}" загружен!`, 'success');
-                setTimeout(() => resultDiv.style.display = 'none', 2000);
-            };
-            reader.readAsText(file);
-        }
-
-        // ─── ИМПОРТ ИЗ GITHUB ───
-        async function importFromGitHub() {
-            const url = githubUrl.value.trim();
-            if (!url) {
-                showResult('❌ Введите ссылку на GitHub файл (raw)', 'error');
-                return;
-            }
-
-            try {
-                const response = await fetch(url);
-                if (!response.ok) throw new Error('Не удалось загрузить файл');
-                const html = await response.text();
-
-                // Извлекаем название из URL
-                const nameMatch = url.match(/\/([^\/]+)\.html$/);
-                const name = nameMatch ? nameMatch[1] : 'Импорт';
-
-                codeTextarea.value = html;
-                siteName.value = name;
-                showResult(`✅ Файл из GitHub загружен!`, 'success');
-                setTimeout(() => resultDiv.style.display = 'none', 2000);
-            } catch (error) {
-                showResult(`❌ Ошибка: ${error.message}`, 'error');
-            }
-        }
 
         // ─── ДЕПЛОЙ ───
         async function deploy() {
@@ -1047,8 +1276,17 @@
                 const body = { html_content: html };
                 if (id) body.id = id;
 
-                const response = await fetch(`${SUPABASE_URL}/rest/v1/pages`, {
-                    method: 'POST',
+                // Если редактируем существующий — обновляем
+                let url = `${SUPABASE_URL}/rest/v1/pages`;
+                let method = 'POST';
+
+                if (editingProjectId) {
+                    url += `?id=eq.${editingProjectId}`;
+                    method = 'PATCH';
+                }
+
+                const response = await fetch(url, {
+                    method: method,
                     headers: {
                         'Content-Type': 'application/json',
                         'apikey': SUPABASE_KEY,
@@ -1064,19 +1302,20 @@
                 }
 
                 const data = await response.json();
-                const newId = data[0]?.id;
+                const newId = editingProjectId || data[0]?.id;
 
                 if (!newId) throw new Error('Не удалось получить ID страницы');
 
-                const url = `${window.location.origin}/page/${newId}`;
+                const projectUrl = `${window.location.origin}/page/${newId}`;
                 showResult(
-                    `✅ <strong>Деплой успешен!</strong><br>
-                     🔗 <a href="${url}" target="_blank">${url}</a><br>
+                    `✅ <strong>${editingProjectId ? 'Обновлено' : 'Деплой успешен'}!</strong><br>
+                     🔗 <a href="${projectUrl}" target="_blank">${projectUrl}</a><br>
                      📋 ID: <code>${newId}</code>`,
                     'success'
                 );
 
                 customId.value = '';
+                editingProjectId = null;
                 await loadAllProjects();
 
             } catch (error) {
@@ -1095,11 +1334,9 @@
                 showResult('⚠️ Введи HTML-код для предпросмотра.', 'error');
                 return;
             }
-            previewFrame.srcdoc = html;
-            document.getElementById('previewContainer').style.display = 'block';
-            codeTextarea.style.display = 'none';
-            document.getElementById('blocksContainer').style.display = 'none';
-            switchTab('preview');
+            const win = window.open('', '_blank');
+            win.document.write(html);
+            win.document.close();
         }
 
         // ─── ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК ───
@@ -1107,31 +1344,19 @@
             const tabs = document.querySelectorAll('.tabs button');
             tabs.forEach(b => b.classList.remove('active'));
 
-            if (tab === 'code') {
+            if (tab === 'visual') {
                 tabs[0].classList.add('active');
-                codeTextarea.style.display = 'block';
-                previewContainer.style.display = 'none';
-                document.getElementById('blocksContainer').style.display = 'none';
-            } else if (tab === 'preview') {
-                tabs[1].classList.add('active');
+                visualEditor.style.display = 'block';
+                codeTextarea.classList.remove('visible');
                 codeTextarea.style.display = 'none';
-                previewContainer.style.display = 'block';
-                document.getElementById('blocksContainer').style.display = 'none';
-                previewFrame.srcdoc = codeTextarea.value;
-            } else if (tab === 'blocks') {
-                tabs[2].classList.add('active');
+                updateVisualFromCode();
+            } else {
+                tabs[1].classList.add('active');
+                visualEditor.style.display = 'none';
+                codeTextarea.classList.add('visible');
                 codeTextarea.style.display = 'block';
-                previewContainer.style.display = 'none';
-                document.getElementById('blocksContainer').style.display = 'block';
+                syncVisualToCode();
             }
-        }
-
-        // ─── ОЧИСТКА ───
-        function clearEditor() {
-            codeTextarea.value = '';
-            fileName.textContent = '';
-            showResult('🗑️ Редактор очищен', '');
-            setTimeout(() => resultDiv.style.display = 'none', 1500);
         }
 
         // ─── НОВЫЙ ПРОЕКТ ───
@@ -1152,7 +1377,8 @@
         </body>
         </html>`;
             customId.value = '';
-            fileName.textContent = '';
+            editingProjectId = null;
+            updateVisualFromCode();
             showResult('✨ Новый проект создан!', 'success');
             setTimeout(() => resultDiv.style.display = 'none', 2000);
         }
@@ -1176,31 +1402,21 @@
         });
 
         const savedCode = localStorage.getItem('hf_sites_code');
-        if (savedCode) codeTextarea.value = savedCode;
+        if (savedCode) {
+            codeTextarea.value = savedCode;
+            updateVisualFromCode();
+        }
         const savedName = localStorage.getItem('hf_sites_name');
         if (savedName) siteName.value = savedName;
 
-        // ─── ГОРЯЧИЕ КЛАВИШИ ───
-        document.addEventListener('keydown', (e) => {
-            if (e.ctrlKey && e.key === 'Enter') {
-                e.preventDefault();
-                deploy();
-            }
-            if (e.ctrlKey && e.shiftKey && e.key === 'P') {
-                e.preventDefault();
-                preview();
-            }
-        });
-
         // ─── ЗАГРУЗКА ───
         loadAllProjects();
-        console.log('⚡ HF Sites загружен!');
-        console.log('📌 Ctrl+Enter — деплой');
-        console.log('📌 Ctrl+Shift+P — предпросмотр');
-        console.log('📁 Загрузка .html файлов — перетащи или нажми на зону');
-        console.log('📥 Импорт с GitHub — вставь ссылку raw');
-        console.log('🗑️ Удаление проектов — кнопка корзины');
-        console.log('📝 Свой ID — поле "Свой ID"');
+        console.log('⚡ HF Sites 2.0 загружен!');
+        console.log('📌 Визуальный редактор — добавляй блоки кнопками');
+        console.log('📁 Загружай PNG, JPG, MP4, MP3 — перетаскиванием');
+        console.log('✏️ Редактирование — клик на ✏️ у проекта');
+        console.log('🗑️ Удаление — клик на 🗑️ у проекта');
+        console.log('📥 Импорт с GitHub — вставь raw-ссылку');
     </script>
 
 </body>
