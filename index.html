@@ -5,732 +5,113 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HF Sites — конструктор сайтов</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: #0a0a0f;
-            color: #e5e5e5;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .header {
-            max-width: 1400px;
-            margin: 0 auto 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 24px;
-            background: #14141e;
-            border-radius: 16px;
-            border: 1px solid #2a2a3a;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 26px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #f093fb, #f5576c);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .logo span {
-            font-size: 30px;
-            -webkit-text-fill-color: initial;
-        }
-
-        .header-actions {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .header-actions button {
-            padding: 8px 18px;
-            border-radius: 8px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 13px;
-        }
-
-        .btn-ghost {
-            background: transparent;
-            color: #a0a0b0;
-            border: 1px solid #2a2a3a !important;
-        }
-
-        .btn-ghost:hover {
-            background: #1a1a2a;
-            color: #fff;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #f093fb, #f5576c);
-            color: #fff;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(245, 87, 108, 0.3);
-        }
-
-        .btn-danger {
-            background: #7f1d1d;
-            color: #fff;
-        }
-
-        .btn-danger:hover {
-            background: #991b1b;
-            transform: translateY(-2px);
-        }
-
-        .stats-bar {
-            max-width: 1400px;
-            margin: 0 auto 25px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 15px;
-            padding: 0 10px;
-        }
-
-        .stat-card {
-            background: #14141e;
-            border: 1px solid #2a2a3a;
-            border-radius: 12px;
-            padding: 14px 18px;
-        }
-
-        .stat-card .label {
-            color: #6b6b80;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .stat-card .value {
-            font-size: 22px;
-            font-weight: 700;
-            margin-top: 4px;
-            color: #fff;
-        }
-
-        .stat-card .sub {
-            color: #6b6b80;
-            font-size: 12px;
-            margin-top: 2px;
-        }
-
-        .main-grid {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 340px;
-            gap: 25px;
-        }
-
-        @media (max-width: 1000px) {
-            .main-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .editor-panel {
-            background: #14141e;
-            border: 1px solid #2a2a3a;
-            border-radius: 16px;
-            padding: 24px;
-        }
-
-        .editor-panel .tabs {
-            display: flex;
-            gap: 4px;
-            margin-bottom: 16px;
-            border-bottom: 1px solid #2a2a3a;
-            padding-bottom: 12px;
-            flex-wrap: wrap;
-        }
-
-        .editor-panel .tabs button {
-            background: transparent;
-            border: none;
-            color: #6b6b80;
-            padding: 6px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-
-        .editor-panel .tabs button.active {
-            background: #2a2a3a;
-            color: #fff;
-        }
-
-        .editor-panel .tabs button:hover {
-            color: #fff;
-        }
-
-        .site-settings {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-
-        .site-settings input {
-            padding: 10px 14px;
-            border-radius: 8px;
-            border: 1px solid #2a2a3a;
-            background: #0d0d14;
-            color: #e5e5e5;
-            font-size: 14px;
-            transition: border-color 0.2s;
-        }
-
-        .site-settings input:focus {
-            outline: none;
-            border-color: #f5576c;
-        }
-
-        .site-settings input::placeholder {
-            color: #4a4a5a;
-        }
-
-        /* ── ВИЗУАЛЬНЫЙ РЕДАКТОР ── */
-        .visual-editor {
-            border: 1px solid #2a2a3a;
-            border-radius: 10px;
-            padding: 16px;
-            min-height: 300px;
-            background: #0d0d14;
-            margin-bottom: 12px;
-            position: relative;
-        }
-
-        .visual-editor .placeholder {
-            color: #4a4a5a;
-            text-align: center;
-            padding: 40px 20px;
-        }
-
-        .visual-editor .placeholder .icon {
-            font-size: 48px;
-            margin-bottom: 12px;
-        }
-
-        .visual-editor .toolbar {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 12px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid #2a2a3a;
-        }
-
-        .visual-editor .toolbar button {
-            padding: 6px 14px;
-            border-radius: 6px;
-            border: 1px solid #2a2a3a;
-            background: transparent;
-            color: #a0a0b0;
-            cursor: pointer;
-            font-size: 12px;
-            transition: all 0.2s;
-        }
-
-        .visual-editor .toolbar button:hover {
-            background: #2a2a3a;
-            color: #fff;
-        }
-
-        .visual-editor .toolbar button.active {
-            background: #2a2a3a;
-            color: #fff;
-            border-color: #f5576c;
-        }
-
-        .visual-editor .content-area {
-            min-height: 200px;
-            padding: 12px;
-            background: #fff;
-            border-radius: 8px;
-            color: #333;
-        }
-
-        .visual-editor .content-area:empty::before {
-            content: "Нажмите на блок выше, чтобы добавить контент";
-            color: #999;
-            font-style: italic;
-        }
-
-        .visual-editor .content-area img,
-        .visual-editor .content-area video {
-            max-width: 100%;
-            border-radius: 8px;
-            margin: 8px 0;
-        }
-
-        .visual-editor .content-area audio {
-            width: 100%;
-            margin: 8px 0;
-        }
-
-        .file-upload-area {
-            border: 2px dashed #2a2a3a;
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-            margin-bottom: 16px;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .file-upload-area:hover {
-            border-color: #f5576c;
-            background: #1a1a2a;
-        }
-
-        .file-upload-area.dragover {
-            border-color: #f093fb;
-            background: #1a1a2a;
-            transform: scale(1.02);
-        }
-
-        .file-upload-area input[type="file"] {
-            display: none;
-        }
-
-        .file-upload-area .icon {
-            font-size: 32px;
-            margin-bottom: 8px;
-        }
-
-        .file-upload-area p {
-            color: #6b6b80;
-            font-size: 13px;
-        }
-
-        .file-upload-area .file-name {
-            color: #f093fb;
-            font-weight: 600;
-            margin-top: 6px;
-        }
-
-        .github-import {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 16px;
-        }
-
-        .github-import input {
-            flex: 1;
-            padding: 10px 14px;
-            border-radius: 8px;
-            border: 1px solid #2a2a3a;
-            background: #0d0d14;
-            color: #e5e5e5;
-            font-size: 13px;
-        }
-
-        .github-import input:focus {
-            outline: none;
-            border-color: #f5576c;
-        }
-
-        .github-import input::placeholder {
-            color: #4a4a5a;
-        }
-
-        .github-import button {
-            padding: 10px 20px;
-            border-radius: 8px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            background: #24243e;
-            color: #fff;
-            white-space: nowrap;
-        }
-
-        .github-import button:hover {
-            background: #3a3a5a;
-        }
-
-        textarea {
-            width: 100%;
-            height: 320px;
-            padding: 16px;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 13px;
-            background: #0d0d14;
-            border: 1px solid #2a2a3a;
-            border-radius: 10px;
-            color: #e5e5e5;
-            resize: vertical;
-            line-height: 1.6;
-            transition: border-color 0.2s;
-            display: none;
-        }
-
-        textarea:focus {
-            outline: none;
-            border-color: #f5576c;
-            box-shadow: 0 0 0 3px rgba(245, 87, 108, 0.1);
-        }
-
-        textarea.visible {
-            display: block;
-        }
-
-        .editor-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 16px;
-            flex-wrap: wrap;
-        }
-
-        .editor-actions button {
-            padding: 10px 20px;
-            border-radius: 10px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 13px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-deploy {
-            background: linear-gradient(135deg, #f093fb, #f5576c);
-            color: #fff;
-        }
-
-        .btn-deploy:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(245, 87, 108, 0.3);
-        }
-
-        .btn-deploy:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .btn-preview {
-            background: #2a2a3a;
-            color: #e5e5e5;
-        }
-
-        .btn-preview:hover {
-            background: #3a3a4a;
-        }
-
-        .btn-edit {
-            background: #1a3a5a;
-            color: #fff;
-        }
-
-        .btn-edit:hover {
-            background: #2a4a6a;
-        }
-
-        .projects-panel {
-            background: #14141e;
-            border: 1px solid #2a2a3a;
-            border-radius: 16px;
-            padding: 24px;
-        }
-
-        .projects-panel h3 {
-            font-size: 15px;
-            margin-bottom: 16px;
-            color: #e5e5e5;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .projects-panel h3 span {
-            color: #6b6b80;
-            font-weight: 400;
-            font-size: 12px;
-        }
-
-        .project-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            max-height: 500px;
-            overflow-y: auto;
-        }
-
-        .project-list::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .project-list::-webkit-scrollbar-thumb {
-            background: #2a2a3a;
-            border-radius: 4px;
-        }
-
-        .project-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 14px;
-            background: #0d0d14;
-            border-radius: 10px;
-            border: 1px solid transparent;
-            transition: all 0.2s;
-        }
-
-        .project-item:hover {
-            border-color: #2a2a3a;
-            background: #12121c;
-        }
-
-        .project-item .info {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-            flex: 1;
-            min-width: 0;
-            cursor: pointer;
-        }
-
-        .project-item .info:hover .name {
-            color: #f093fb;
-        }
-
-        .project-item .name {
-            font-weight: 600;
-            color: #e5e5e5;
-            font-size: 13px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            transition: color 0.2s;
-        }
-
-        .project-item .url {
-            font-size: 11px;
-            color: #6b6b80;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .project-item .actions {
-            display: flex;
-            gap: 6px;
-            flex-shrink: 0;
-            margin-left: 10px;
-        }
-
-        .project-item .actions button {
-            background: transparent;
-            border: none;
-            color: #6b6b80;
-            cursor: pointer;
-            padding: 4px 8px;
-            border-radius: 4px;
-            transition: all 0.2s;
-            font-size: 14px;
-        }
-
-        .project-item .actions button:hover {
-            background: #2a2a3a;
-            color: #fff;
-        }
-
-        .project-item .actions .delete:hover {
-            background: #7f1d1d;
-            color: #fca5a5;
-        }
-
-        .project-item .actions .edit:hover {
-            background: #1a3a5a;
-            color: #60a5fa;
-        }
-
-        .project-item .status {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #22c55e;
-            flex-shrink: 0;
-            margin-left: 8px;
-        }
-
-        #result {
-            margin-top: 14px;
-            padding: 12px 16px;
-            border-radius: 10px;
-            display: none;
-            font-size: 13px;
-            line-height: 1.6;
-        }
-
-        #result.success {
-            display: block;
-            background: #064e3b;
-            border: 1px solid #065f46;
-            color: #6ee7b7;
-        }
-
-        #result.error {
-            display: block;
-            background: #4c0519;
-            border: 1px solid #7f1d1d;
-            color: #fca5a5;
-        }
-
-        #result a {
-            color: #6ee7b7;
-            font-weight: 600;
-            text-decoration: none;
-            border-bottom: 1px solid #6ee7b7;
-        }
-
-        #result a:hover {
-            opacity: 0.8;
-        }
-
-        .loader {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 3px solid rgba(255,255,255,0.2);
-            border-top: 3px solid #fff;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 30px 20px;
-            color: #4a4a5a;
-        }
-
-        .empty-state .icon {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
-
-        .empty-state p {
-            font-size: 13px;
-        }
-
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(4px);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal {
-            background: #14141e;
-            border: 1px solid #2a2a3a;
-            border-radius: 16px;
-            padding: 30px;
-            max-width: 420px;
-            width: 90%;
-        }
-
-        .modal h3 {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-
-        .modal p {
-            color: #a0a0b0;
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
-
-        .modal .buttons {
-            display: flex;
-            gap: 10px;
-            justify-content: flex-end;
-        }
-
-        .modal .buttons button {
-            padding: 8px 24px;
-            border-radius: 8px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        @media (max-width: 600px) {
-            .header {
-                padding: 12px 16px;
-            }
-            .logo {
-                font-size: 20px;
-            }
-            .stats-bar {
-                grid-template-columns: 1fr 1fr;
-            }
-            .editor-panel,
-            .projects-panel {
-                padding: 16px;
-            }
-            .site-settings {
-                grid-template-columns: 1fr;
-            }
-            .github-import {
-                flex-direction: column;
-            }
-            .visual-editor .toolbar {
-                gap: 4px;
-            }
-            .visual-editor .toolbar button {
-                font-size: 11px;
-                padding: 4px 10px;
-            }
-        }
+        /* ── ВСЕ СТИЛИ (ТЕ ЖЕ, ЧТО В ПРЕДЫДУЩЕЙ ВЕРСИИ) ── */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; background: #0a0a0f; color: #e5e5e5; min-height: 100vh; padding: 20px; }
+        .header { max-width: 1400px; margin: 0 auto 25px; display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; background: #14141e; border-radius: 16px; border: 1px solid #2a2a3a; flex-wrap: wrap; gap: 15px; }
+        .logo { display: flex; align-items: center; gap: 12px; font-size: 26px; font-weight: 800; background: linear-gradient(135deg, #f093fb, #f5576c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .logo span { font-size: 30px; -webkit-text-fill-color: initial; }
+        .header-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+        .header-actions button { padding: 8px 18px; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; transition: all 0.2s; font-size: 13px; }
+        .btn-ghost { background: transparent; color: #a0a0b0; border: 1px solid #2a2a3a !important; }
+        .btn-ghost:hover { background: #1a1a2a; color: #fff; }
+        .btn-primary { background: linear-gradient(135deg, #f093fb, #f5576c); color: #fff; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(245, 87, 108, 0.3); }
+        .btn-danger { background: #7f1d1d; color: #fff; }
+        .btn-danger:hover { background: #991b1b; transform: translateY(-2px); }
+        .stats-bar { max-width: 1400px; margin: 0 auto 25px; display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; padding: 0 10px; }
+        .stat-card { background: #14141e; border: 1px solid #2a2a3a; border-radius: 12px; padding: 14px 18px; }
+        .stat-card .label { color: #6b6b80; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .stat-card .value { font-size: 22px; font-weight: 700; margin-top: 4px; color: #fff; }
+        .stat-card .sub { color: #6b6b80; font-size: 12px; margin-top: 2px; }
+        .main-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 340px; gap: 25px; }
+        @media (max-width: 1000px) { .main-grid { grid-template-columns: 1fr; } }
+        .editor-panel { background: #14141e; border: 1px solid #2a2a3a; border-radius: 16px; padding: 24px; }
+        .editor-panel .tabs { display: flex; gap: 4px; margin-bottom: 16px; border-bottom: 1px solid #2a2a3a; padding-bottom: 12px; flex-wrap: wrap; }
+        .editor-panel .tabs button { background: transparent; border: none; color: #6b6b80; padding: 6px 16px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 500; transition: all 0.2s; }
+        .editor-panel .tabs button.active { background: #2a2a3a; color: #fff; }
+        .editor-panel .tabs button:hover { color: #fff; }
+        .site-settings { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+        .site-settings input { padding: 10px 14px; border-radius: 8px; border: 1px solid #2a2a3a; background: #0d0d14; color: #e5e5e5; font-size: 14px; transition: border-color 0.2s; }
+        .site-settings input:focus { outline: none; border-color: #f5576c; }
+        .site-settings input::placeholder { color: #4a4a5a; }
+        .visual-editor { border: 1px solid #2a2a3a; border-radius: 10px; padding: 16px; min-height: 300px; background: #0d0d14; margin-bottom: 12px; }
+        .visual-editor .toolbar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #2a2a3a; }
+        .visual-editor .toolbar button { padding: 6px 14px; border-radius: 6px; border: 1px solid #2a2a3a; background: transparent; color: #a0a0b0; cursor: pointer; font-size: 12px; transition: all 0.2s; }
+        .visual-editor .toolbar button:hover { background: #2a2a3a; color: #fff; }
+        .visual-editor .toolbar button.active { background: #2a2a3a; color: #fff; border-color: #f5576c; }
+        .visual-editor .content-area { min-height: 200px; padding: 12px; background: #fff; border-radius: 8px; color: #333; }
+        .visual-editor .content-area:empty::before { content: "Нажмите на блок выше, чтобы добавить контент"; color: #999; font-style: italic; }
+        .visual-editor .content-area img, .visual-editor .content-area video { max-width: 100%; border-radius: 8px; margin: 8px 0; }
+        .visual-editor .content-area audio { width: 100%; margin: 8px 0; }
+        .file-upload-area { border: 2px dashed #2a2a3a; border-radius: 10px; padding: 20px; text-align: center; margin-bottom: 16px; transition: all 0.3s; cursor: pointer; }
+        .file-upload-area:hover { border-color: #f5576c; background: #1a1a2a; }
+        .file-upload-area.dragover { border-color: #f093fb; background: #1a1a2a; transform: scale(1.02); }
+        .file-upload-area input[type="file"] { display: none; }
+        .file-upload-area .icon { font-size: 32px; margin-bottom: 8px; }
+        .file-upload-area p { color: #6b6b80; font-size: 13px; }
+        .file-upload-area .file-name { color: #f093fb; font-weight: 600; margin-top: 6px; }
+        .github-import { display: flex; gap: 10px; margin-bottom: 16px; }
+        .github-import input { flex: 1; padding: 10px 14px; border-radius: 8px; border: 1px solid #2a2a3a; background: #0d0d14; color: #e5e5e5; font-size: 13px; }
+        .github-import input:focus { outline: none; border-color: #f5576c; }
+        .github-import input::placeholder { color: #4a4a5a; }
+        .github-import button { padding: 10px 20px; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; transition: all 0.2s; background: #24243e; color: #fff; white-space: nowrap; }
+        .github-import button:hover { background: #3a3a5a; }
+        textarea { width: 100%; height: 320px; padding: 16px; font-family: 'Courier New', Courier, monospace; font-size: 13px; background: #0d0d14; border: 1px solid #2a2a3a; border-radius: 10px; color: #e5e5e5; resize: vertical; line-height: 1.6; transition: border-color 0.2s; display: none; }
+        textarea:focus { outline: none; border-color: #f5576c; box-shadow: 0 0 0 3px rgba(245, 87, 108, 0.1); }
+        textarea.visible { display: block; }
+        .editor-actions { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+        .editor-actions button { padding: 10px 20px; border-radius: 10px; border: none; font-weight: 600; cursor: pointer; transition: all 0.2s; font-size: 13px; display: flex; align-items: center; gap: 8px; }
+        .btn-deploy { background: linear-gradient(135deg, #f093fb, #f5576c); color: #fff; }
+        .btn-deploy:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(245, 87, 108, 0.3); }
+        .btn-deploy:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-preview { background: #2a2a3a; color: #e5e5e5; }
+        .btn-preview:hover { background: #3a3a4a; }
+        .btn-edit { background: #1a3a5a; color: #fff; }
+        .btn-edit:hover { background: #2a4a6a; }
+        .projects-panel { background: #14141e; border: 1px solid #2a2a3a; border-radius: 16px; padding: 24px; }
+        .projects-panel h3 { font-size: 15px; margin-bottom: 16px; color: #e5e5e5; display: flex; justify-content: space-between; align-items: center; }
+        .projects-panel h3 span { color: #6b6b80; font-weight: 400; font-size: 12px; }
+        .project-list { display: flex; flex-direction: column; gap: 8px; max-height: 500px; overflow-y: auto; }
+        .project-list::-webkit-scrollbar { width: 4px; }
+        .project-list::-webkit-scrollbar-thumb { background: #2a2a3a; border-radius: 4px; }
+        .project-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: #0d0d14; border-radius: 10px; border: 1px solid transparent; transition: all 0.2s; }
+        .project-item:hover { border-color: #2a2a3a; background: #12121c; }
+        .project-item .info { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; cursor: pointer; }
+        .project-item .info:hover .name { color: #f093fb; }
+        .project-item .name { font-weight: 600; color: #e5e5e5; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color 0.2s; }
+        .project-item .url { font-size: 11px; color: #6b6b80; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .project-item .actions { display: flex; gap: 6px; flex-shrink: 0; margin-left: 10px; }
+        .project-item .actions button { background: transparent; border: none; color: #6b6b80; cursor: pointer; padding: 4px 8px; border-radius: 4px; transition: all 0.2s; font-size: 14px; }
+        .project-item .actions button:hover { background: #2a2a3a; color: #fff; }
+        .project-item .actions .delete:hover { background: #7f1d1d; color: #fca5a5; }
+        .project-item .actions .edit:hover { background: #1a3a5a; color: #60a5fa; }
+        .project-item .status { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; flex-shrink: 0; margin-left: 8px; }
+        #result { margin-top: 14px; padding: 12px 16px; border-radius: 10px; display: none; font-size: 13px; line-height: 1.6; }
+        #result.success { display: block; background: #064e3b; border: 1px solid #065f46; color: #6ee7b7; }
+        #result.error { display: block; background: #4c0519; border: 1px solid #7f1d1d; color: #fca5a5; }
+        #result a { color: #6ee7b7; font-weight: 600; text-decoration: none; border-bottom: 1px solid #6ee7b7; }
+        #result a:hover { opacity: 0.8; }
+        .loader { display: inline-block; width: 16px; height: 16px; border: 3px solid rgba(255,255,255,0.2); border-top: 3px solid #fff; border-radius: 50%; animation: spin 0.8s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .empty-state { text-align: center; padding: 30px 20px; color: #4a4a5a; }
+        .empty-state .icon { font-size: 40px; margin-bottom: 10px; }
+        .empty-state p { font-size: 13px; }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); z-index: 1000; justify-content: center; align-items: center; }
+        .modal-overlay.active { display: flex; }
+        .modal { background: #14141e; border: 1px solid #2a2a3a; border-radius: 16px; padding: 30px; max-width: 420px; width: 90%; }
+        .modal h3 { font-size: 18px; margin-bottom: 10px; }
+        .modal p { color: #a0a0b0; margin-bottom: 20px; font-size: 14px; }
+        .modal .buttons { display: flex; gap: 10px; justify-content: flex-end; }
+        .modal .buttons button { padding: 8px 24px; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        @media (max-width: 600px) { .header { padding: 12px 16px; } .logo { font-size: 20px; } .stats-bar { grid-template-columns: 1fr 1fr; } .editor-panel, .projects-panel { padding: 16px; } .site-settings { grid-template-columns: 1fr; } .github-import { flex-direction: column; } .visual-editor .toolbar { gap: 4px; } .visual-editor .toolbar button { font-size: 11px; padding: 4px 10px; } }
     </style>
 </head>
 <body>
 
     <!-- ═══ ШАПКА ═══ -->
     <header class="header">
-        <div class="logo">
-            <span>⚡</span> HF Sites
-        </div>
+        <div class="logo"><span>⚡</span> HF Sites</div>
         <div class="header-actions">
             <button class="btn-ghost" onclick="loadAllProjects()">🔄 Обновить</button>
             <button class="btn-primary" onclick="newProject()">+ Новый сайт</button>
@@ -739,21 +120,9 @@
 
     <!-- ═══ СТАТИСТИКА ═══ -->
     <div class="stats-bar">
-        <div class="stat-card">
-            <div class="label">Сайты</div>
-            <div class="value" id="projectCount">0</div>
-            <div class="sub">всего</div>
-        </div>
-        <div class="stat-card">
-            <div class="label">Деплои</div>
-            <div class="value" id="deployCount">0</div>
-            <div class="sub">за всё время</div>
-        </div>
-        <div class="stat-card">
-            <div class="label">Статус</div>
-            <div class="value" style="font-size:16px; color:#22c55e;">✅ Работает</div>
-            <div class="sub">Supabase + Vercel</div>
-        </div>
+        <div class="stat-card"><div class="label">Сайты</div><div class="value" id="projectCount">0</div><div class="sub">всего</div></div>
+        <div class="stat-card"><div class="label">Деплои</div><div class="value" id="deployCount">0</div><div class="sub">за всё время</div></div>
+        <div class="stat-card"><div class="label">Статус</div><div class="value" style="font-size:16px; color:#22c55e;">✅ Работает</div><div class="sub">Supabase + Vercel</div></div>
     </div>
 
     <!-- ═══ ОСНОВНАЯ СЕТКА ═══ -->
@@ -766,7 +135,6 @@
                 <button onclick="switchTab('code')">📝 Код</button>
             </div>
 
-            <!-- Настройки сайта -->
             <div class="site-settings">
                 <input type="text" id="siteName" placeholder="Название сайта" value="Мой сайт" />
                 <input type="text" id="customId" placeholder="Свой ID (например: my-site)" />
@@ -810,30 +178,17 @@
             </div>
 
             <textarea id="code" spellcheck="false"><!DOCTYPE html>
-<html>
-<head>
-    <title>Мой сайт</title>
-    <style>
-        body { font-family: Arial; text-align: center; padding: 50px; background: linear-gradient(135deg, #f093fb, #f5576c); color: #fff; }
-        h1 { font-size: 3em; }
-    </style>
-</head>
-<body>
-    <h1>⚡ HF Sites</h1>
-    <p>Мой первый сайт!</p>
-</body>
-</html></textarea>
+        <html>
+        <head><title>Мой сайт</title>
+        <style>body { font-family: Arial; text-align: center; padding: 50px; background: linear-gradient(135deg, #f093fb, #f5576c); color: #fff; } h1 { font-size: 3em; }</style>
+        </head>
+        <body><h1>⚡ HF Sites</h1><p>Мой первый сайт!</p></body>
+        </html></textarea>
 
             <div class="editor-actions">
-                <button class="btn-deploy" id="deployBtn" onclick="deploy()">
-                    🚀 Деплоить
-                </button>
-                <button class="btn-preview" onclick="preview()">
-                    👁️ Превью
-                </button>
-                <button class="btn-edit" onclick="syncVisualToCode()">
-                    💾 Сохранить в код
-                </button>
+                <button class="btn-deploy" id="deployBtn" onclick="deploy()">🚀 Деплоить</button>
+                <button class="btn-preview" onclick="preview()">👁️ Превью</button>
+                <button class="btn-edit" onclick="syncVisualToCode()">💾 Сохранить в код</button>
             </div>
 
             <div id="result"></div>
@@ -841,16 +196,9 @@
 
         <!-- ПРАВАЯ КОЛОНКА -->
         <div class="projects-panel">
-            <h3>
-                📁 Мои сайты
-                <span id="projectCounter">0</span>
-            </h3>
+            <h3>📁 Мои сайты <span id="projectCounter">0</span></h3>
             <div class="project-list" id="projectList">
-                <div class="empty-state">
-                    <div class="icon">📭</div>
-                    <p>Нет сайтов</p>
-                    <p style="font-size:12px; color:#3a3a4a;">Создай первый сайт!</p>
-                </div>
+                <div class="empty-state"><div class="icon">📭</div><p>Нет сайтов</p><p style="font-size:12px; color:#3a3a4a;">Создай первый сайт!</p></div>
             </div>
         </div>
 
@@ -911,7 +259,6 @@
         let editingProjectId = null;
 
         // ─── ВИЗУАЛЬНЫЙ РЕДАКТОР ───
-
         function addVisualBlock(type) {
             const blocks = {
                 text: '<p style="font-size:16px; line-height:1.8; color:#333; max-width:600px; margin:10px auto;">Ваш текст здесь. Вы можете его редактировать.</p>',
@@ -926,167 +273,88 @@
                 list: '<ul style="text-align:left; max-width:400px; margin:10px auto; color:#333; font-size:16px; line-height:2;"><li>Пункт 1</li><li>Пункт 2</li><li>Пункт 3</li></ul>'
             };
 
-            // Убираем плейсхолдер
             if (visualContent.innerHTML.includes('Нажмите на кнопку выше')) {
                 visualContent.innerHTML = '';
             }
-
             visualContent.innerHTML += blocks[type] || '';
             syncVisualToCode();
         }
 
         function clearVisual() {
-            visualContent.innerHTML = `
-                <p style="color:#999; font-style:italic; text-align:center; padding:40px 20px;">
-                    Нажмите на кнопку выше, чтобы добавить контент<br>
-                    Или перетащите файлы сюда
-                </p>
-            `;
+            visualContent.innerHTML = `<p style="color:#999; font-style:italic; text-align:center; padding:40px 20px;">Нажмите на кнопку выше, чтобы добавить контент<br>Или перетащите файлы сюда</p>`;
             syncVisualToCode();
         }
 
         function syncVisualToCode() {
             const html = visualContent.innerHTML;
-            if (html.includes('Нажмите на кнопку выше')) {
-                return;
-            }
-            // Создаём полный HTML документ
+            if (html.includes('Нажмите на кнопку выше')) return;
             const fullHtml = `<!DOCTYPE html>
         <html>
-        <head>
-            <title>${siteName.value || 'Мой сайт'}</title>
-            <style>
-                body { font-family: Arial; text-align: center; padding: 40px 20px; background: #f5f5f5; color: #333; max-width: 900px; margin: 0 auto; }
-                * { box-sizing: border-box; }
-            </style>
+        <head><title>${siteName.value || 'Мой сайт'}</title>
+        <style>body { font-family: Arial; text-align: center; padding: 40px 20px; background: #f5f5f5; color: #333; max-width: 900px; margin: 0 auto; } * { box-sizing: border-box; }</style>
         </head>
-        <body>
-            ${html}
-        </body>
+        <body>${html}</body>
         </html>`;
             codeTextarea.value = fullHtml;
         }
 
-        // ─── ЗАГРУЗКА МЕДИА ───
+        // ─── МЕДИА ───
         mediaInput.addEventListener('change', (e) => {
-            const files = e.target.files;
-            for (let file of files) {
-                handleMediaFile(file);
-            }
+            for (let file of e.target.files) handleMediaFile(file);
             mediaInput.value = '';
         });
 
-        // Drag and Drop для медиа
-        dropZone.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            dropZone.classList.add('dragover');
-        });
-
-        dropZone.addEventListener('dragleave', () => {
-            dropZone.classList.remove('dragover');
-        });
-
+        dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
+        dropZone.addEventListener('dragleave', () => { dropZone.classList.remove('dragover'); });
         dropZone.addEventListener('drop', (e) => {
             e.preventDefault();
             dropZone.classList.remove('dragover');
-            const files = e.dataTransfer.files;
-            for (let file of files) {
-                handleMediaFile(file);
-            }
+            for (let file of e.dataTransfer.files) handleMediaFile(file);
         });
 
         function handleMediaFile(file) {
             const reader = new FileReader();
             reader.onload = (e) => {
                 const dataUrl = e.target.result;
-
-                // Убираем плейсхолдер
-                if (visualContent.innerHTML.includes('Нажмите на кнопку выше')) {
-                    visualContent.innerHTML = '';
-                }
-
+                if (visualContent.innerHTML.includes('Нажмите на кнопку выше')) visualContent.innerHTML = '';
                 if (file.type.startsWith('image/')) {
                     visualContent.innerHTML += `<img src="${dataUrl}" alt="${file.name}" style="max-width:100%; border-radius:8px; margin:10px 0;" />`;
                 } else if (file.type.startsWith('video/')) {
-                    visualContent.innerHTML += `
-                        <video controls style="max-width:100%; border-radius:8px; margin:10px 0;">
-                            <source src="${dataUrl}" type="${file.type}">
-                            Ваш браузер не поддерживает видео
-                        </video>
-                    `;
+                    visualContent.innerHTML += `<video controls style="max-width:100%; border-radius:8px; margin:10px 0;"><source src="${dataUrl}" type="${file.type}">Ваш браузер не поддерживает видео</video>`;
                 } else if (file.type.startsWith('audio/')) {
-                    visualContent.innerHTML += `
-                        <audio controls style="width:100%; margin:10px 0;">
-                            <source src="${dataUrl}" type="${file.type}">
-                            Ваш браузер не поддерживает аудио
-                        </audio>
-                    `;
+                    visualContent.innerHTML += `<audio controls style="width:100%; margin:10px 0;"><source src="${dataUrl}" type="${file.type}">Ваш браузер не поддерживает аудио</audio>`;
                 }
-
                 mediaFileName.textContent = `📄 Загружено: ${file.name}`;
                 syncVisualToCode();
             };
             reader.readAsDataURL(file);
         }
 
-        // ─── ЗАГРУЗКА HTML ФАЙЛА ───
-        const htmlFileInput = document.createElement('input');
-        htmlFileInput.type = 'file';
-        htmlFileInput.accept = '.html,.htm';
-        htmlFileInput.style.display = 'none';
-        document.body.appendChild(htmlFileInput);
-
-        htmlFileInput.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                codeTextarea.value = e.target.result;
-                siteName.value = file.name.replace('.html', '').replace('.htm', '');
-                showResult(`✅ Файл "${file.name}" загружен!`, 'success');
-                setTimeout(() => resultDiv.style.display = 'none', 2000);
-                // Обновляем визуальный редактор
+        // ─── GITHUB ───
+        async function importFromGitHub() {
+            const url = githubUrl.value.trim();
+            if (!url) { showResult('❌ Введите ссылку на GitHub файл (raw)', 'error'); return; }
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Не удалось загрузить файл');
+                const html = await response.text();
+                const nameMatch = url.match(/\/([^\/]+)\.html$/);
+                codeTextarea.value = html;
+                siteName.value = nameMatch ? nameMatch[1] : 'Импорт';
                 updateVisualFromCode();
-            };
-            reader.readAsText(file);
-        });
+                showResult('✅ Файл из GitHub загружен!', 'success');
+                setTimeout(() => resultDiv.style.display = 'none', 2000);
+            } catch (error) {
+                showResult(`❌ Ошибка: ${error.message}`, 'error');
+            }
+        }
 
-        // Обновляем визуал из кода
         function updateVisualFromCode() {
             const html = codeTextarea.value;
             const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
             if (bodyMatch) {
                 visualContent.innerHTML = bodyMatch[1];
-                // Убираем плейсхолдер если есть контент
-                if (visualContent.innerHTML.trim() && !visualContent.innerHTML.includes('Нажмите на кнопку выше')) {
-                    // OK
-                }
-            }
-        }
-
-        // ─── ИМПОРТ ИЗ GITHUB ───
-        async function importFromGitHub() {
-            const url = githubUrl.value.trim();
-            if (!url) {
-                showResult('❌ Введите ссылку на GitHub файл (raw)', 'error');
-                return;
-            }
-
-            try {
-                const response = await fetch(url);
-                if (!response.ok) throw new Error('Не удалось загрузить файл');
-                const html = await response.text();
-
-                const nameMatch = url.match(/\/([^\/]+)\.html$/);
-                const name = nameMatch ? nameMatch[1] : 'Импорт';
-
-                codeTextarea.value = html;
-                siteName.value = name;
-                updateVisualFromCode();
-                showResult(`✅ Файл из GitHub загружен!`, 'success');
-                setTimeout(() => resultDiv.style.display = 'none', 2000);
-            } catch (error) {
-                showResult(`❌ Ошибка: ${error.message}`, 'error');
+                if (visualContent.innerHTML.trim() && !visualContent.innerHTML.includes('Нажмите на кнопку выше')) {}
             }
         }
 
@@ -1094,18 +362,12 @@
         async function loadAllProjects() {
             try {
                 const response = await fetch(`${SUPABASE_URL}/rest/v1/pages?select=id,html_content,created_at&order=created_at.desc`, {
-                    headers: {
-                        'apikey': SUPABASE_KEY,
-                        'Authorization': `Bearer ${SUPABASE_KEY}`
-                    }
+                    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
                 });
-
                 if (!response.ok) throw new Error('Не удалось загрузить проекты');
-
                 const data = await response.json();
                 allProjects = data;
                 deployCounter = data.length;
-
                 renderProjects(data);
                 updateStats(data.length);
             } catch (error) {
@@ -1113,29 +375,17 @@
             }
         }
 
-        // ─── ОТОБРАЖЕНИЕ ПРОЕКТОВ ───
         function renderProjects(projects) {
             if (!projects || projects.length === 0) {
-                projectList.innerHTML = `
-                    <div class="empty-state">
-                        <div class="icon">📭</div>
-                        <p>Нет сайтов</p>
-                        <p style="font-size:12px; color:#3a3a4a;">Создай первый сайт!</p>
-                    </div>
-                `;
+                projectList.innerHTML = `<div class="empty-state"><div class="icon">📭</div><p>Нет сайтов</p><p style="font-size:12px; color:#3a3a4a;">Создай первый сайт!</p></div>`;
                 projectCounter.textContent = '0';
                 return;
             }
-
             projectList.innerHTML = projects.map(p => {
                 const url = `${window.location.origin}/page/${p.id}`;
-                const time = new Date(p.created_at).toLocaleString('ru', {
-                    day: '2-digit', month: '2-digit', year: '2-digit',
-                    hour: '2-digit', minute: '2-digit'
-                });
+                const time = new Date(p.created_at).toLocaleString('ru', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' });
                 const titleMatch = p.html_content.match(/<title>([^<]*)<\/title>/);
                 const displayName = titleMatch ? titleMatch[1] : p.html_content.replace(/<[^>]*>/g, '').slice(0, 40) + '...';
-
                 return `
                     <div class="project-item">
                         <div class="info" onclick="openProject('${p.id}')">
@@ -1151,60 +401,35 @@
                     </div>
                 `;
             }).join('');
-
             projectCounter.textContent = projects.length;
         }
 
-        // ─── ОТКРЫТЬ ПРОЕКТ ───
-        function openProject(id) {
-            const url = `${window.location.origin}/page/${id}`;
-            window.open(url, '_blank');
-        }
+        function openProject(id) { window.open(`${window.location.origin}/page/${id}`, '_blank'); }
 
-        // ─── РЕДАКТИРОВАТЬ ПРОЕКТ ───
         function editProject(id) {
             const project = allProjects.find(p => p.id === id);
-            if (!project) {
-                showResult('❌ Проект не найден', 'error');
-                return;
-            }
-
+            if (!project) { showResult('❌ Проект не найден', 'error'); return; }
             codeTextarea.value = project.html_content;
             editingProjectId = id;
             updateVisualFromCode();
-
-            // Извлекаем название
             const titleMatch = project.html_content.match(/<title>([^<]*)<\/title>/);
-            if (titleMatch) {
-                siteName.value = titleMatch[1];
-            }
-
-            showResult(`✏️ Проект загружен для редактирования!`, 'success');
+            if (titleMatch) siteName.value = titleMatch[1];
+            showResult('✏️ Проект загружен для редактирования!', 'success');
             setTimeout(() => resultDiv.style.display = 'none', 2000);
-
-            // Показываем модалку
             editModal.classList.add('active');
         }
 
-        function closeEditModal() {
-            editModal.classList.remove('active');
-            editingProjectId = null;
-        }
+        function closeEditModal() { editModal.classList.remove('active'); editingProjectId = null; }
 
-        // ─── ОБНОВЛЕНИЕ СТАТИСТИКИ ───
-        function updateStats(count) {
-            projectCount.textContent = count;
-            deployCount.textContent = deployCounter;
-        }
+        function updateStats(count) { projectCount.textContent = count; deployCount.textContent = deployCounter; }
 
-        // ─── КОПИРОВАТЬ ССЫЛКУ ───
         function copyUrl(url) {
             navigator.clipboard.writeText(url);
             showResult('✅ Ссылка скопирована!', 'success');
             setTimeout(() => resultDiv.style.display = 'none', 2000);
         }
 
-        // ─── УДАЛЕНИЕ ───
+        // ─── УДАЛЕНИЕ (ИСПРАВЛЕНО!) ───
         function confirmDelete(id) {
             deleteTargetId = id;
             document.getElementById('deleteMessage').textContent = 'Вы уверены, что хотите удалить этот сайт? Это действие нельзя отменить.';
@@ -1217,9 +442,14 @@
         }
 
         confirmDeleteBtn.addEventListener('click', async () => {
-            if (!deleteTargetId) return;
+            if (!deleteTargetId) {
+                showResult('❌ Ошибка: ID не найден', 'error');
+                return;
+            }
 
             try {
+                console.log(`🗑️ Удаляем проект с ID: ${deleteTargetId}`);
+
                 const response = await fetch(`${SUPABASE_URL}/rest/v1/pages?id=eq.${deleteTargetId}`, {
                     method: 'DELETE',
                     headers: {
@@ -1228,63 +458,60 @@
                     }
                 });
 
+                console.log(`📡 Ответ сервера: ${response.status} ${response.statusText}`);
+
                 if (!response.ok) {
-                    const err = await response.json();
-                    throw new Error(err.message || 'Не удалось удалить');
+                    const errText = await response.text();
+                    console.error('❌ Ошибка удаления:', errText);
+                    throw new Error(`HTTP ${response.status}: ${errText}`);
+                }
+
+                // Проверяем, что удаление прошло успешно
+                const checkResponse = await fetch(`${SUPABASE_URL}/rest/v1/pages?id=eq.${deleteTargetId}&select=id`, {
+                    headers: {
+                        'apikey': SUPABASE_KEY,
+                        'Authorization': `Bearer ${SUPABASE_KEY}`
+                    }
+                });
+                const checkData = await checkResponse.json();
+
+                if (checkData.length > 0) {
+                    throw new Error('Запись всё ещё существует в базе');
                 }
 
                 showResult('✅ Сайт успешно удалён!', 'success');
                 closeDeleteModal();
                 await loadAllProjects();
+
             } catch (error) {
-                showResult(`❌ Ошибка: ${error.message}`, 'error');
+                console.error('❌ Ошибка удаления:', error);
+                showResult(`❌ Ошибка удаления: ${error.message}`, 'error');
             }
         });
 
         // ─── ДЕПЛОЙ ───
         async function deploy() {
             let html = codeTextarea.value;
-            if (!html.trim()) {
-                showResult('❌ Введи HTML-код!', 'error');
-                return;
-            }
-
+            if (!html.trim()) { showResult('❌ Введи HTML-код!', 'error'); return; }
             const name = siteName.value.trim() || 'Без названия';
-            if (!html.includes('<title>')) {
-                html = html.replace('<head>', `<head><title>${name}</title>`);
-            }
-
+            if (!html.includes('<title>')) html = html.replace('<head>', `<head><title>${name}</title>`);
             let id = customId.value.trim();
             if (id) {
                 const check = await fetch(`${SUPABASE_URL}/rest/v1/pages?id=eq.${id}&select=id`, {
-                    headers: {
-                        'apikey': SUPABASE_KEY,
-                        'Authorization': `Bearer ${SUPABASE_KEY}`
-                    }
+                    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
                 });
                 const existing = await check.json();
-                if (existing.length > 0) {
-                    showResult('❌ Этот ID уже используется! Выбери другой.', 'error');
-                    return;
-                }
+                if (existing.length > 0) { showResult('❌ Этот ID уже используется! Выбери другой.', 'error'); return; }
             }
-
             deployBtn.disabled = true;
             deployBtn.innerHTML = '<span class="loader"></span> Деплоим...';
-
             try {
                 const body = { html_content: html };
                 if (id) body.id = id;
-
-                // Если редактируем существующий — обновляем
                 let url = `${SUPABASE_URL}/rest/v1/pages`;
                 let method = 'POST';
-
-                if (editingProjectId) {
-                    url += `?id=eq.${editingProjectId}`;
-                    method = 'PATCH';
-                }
-
+                if (editingProjectId) { url += `?id=eq.${editingProjectId}`;
+                    method = 'PATCH'; }
                 const response = await fetch(url, {
                     method: method,
                     headers: {
@@ -1295,29 +522,16 @@
                     },
                     body: JSON.stringify(body)
                 });
-
-                if (!response.ok) {
-                    const err = await response.json();
-                    throw new Error(err.message || `HTTP ${response.status}`);
-                }
-
+                if (!response.ok) { const err = await response.json();
+                    throw new Error(err.message || `HTTP ${response.status}`); }
                 const data = await response.json();
                 const newId = editingProjectId || data[0]?.id;
-
                 if (!newId) throw new Error('Не удалось получить ID страницы');
-
                 const projectUrl = `${window.location.origin}/page/${newId}`;
-                showResult(
-                    `✅ <strong>${editingProjectId ? 'Обновлено' : 'Деплой успешен'}!</strong><br>
-                     🔗 <a href="${projectUrl}" target="_blank">${projectUrl}</a><br>
-                     📋 ID: <code>${newId}</code>`,
-                    'success'
-                );
-
+                showResult(`✅ <strong>${editingProjectId ? 'Обновлено' : 'Деплой успешен'}!</strong><br>🔗 <a href="${projectUrl}" target="_blank">${projectUrl}</a><br>📋 ID: <code>${newId}</code>`, 'success');
                 customId.value = '';
                 editingProjectId = null;
                 await loadAllProjects();
-
             } catch (error) {
                 showResult(`❌ Ошибка: ${error.message}`, 'error');
                 console.error('Deploy error:', error);
@@ -1327,23 +541,17 @@
             }
         }
 
-        // ─── ПРЕДПРОСМОТР ───
         function preview() {
             const html = codeTextarea.value;
-            if (!html.trim()) {
-                showResult('⚠️ Введи HTML-код для предпросмотра.', 'error');
-                return;
-            }
+            if (!html.trim()) { showResult('⚠️ Введи HTML-код для предпросмотра.', 'error'); return; }
             const win = window.open('', '_blank');
             win.document.write(html);
             win.document.close();
         }
 
-        // ─── ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК ───
         function switchTab(tab) {
             const tabs = document.querySelectorAll('.tabs button');
             tabs.forEach(b => b.classList.remove('active'));
-
             if (tab === 'visual') {
                 tabs[0].classList.add('active');
                 visualEditor.style.display = 'block';
@@ -1359,22 +567,14 @@
             }
         }
 
-        // ─── НОВЫЙ ПРОЕКТ ───
         function newProject() {
             const name = siteName.value || 'Новый сайт';
             codeTextarea.value = `<!DOCTYPE html>
         <html>
-        <head>
-            <title>${name}</title>
-            <style>
-                body { font-family: Arial; text-align: center; padding: 50px; background: linear-gradient(135deg, #f093fb, #f5576c); color: #fff; }
-                h1 { font-size: 3em; }
-            </style>
+        <head><title>${name}</title>
+        <style>body { font-family: Arial; text-align: center; padding: 50px; background: linear-gradient(135deg, #f093fb, #f5576c); color: #fff; } h1 { font-size: 3em; }</style>
         </head>
-        <body>
-            <h1>⚡ HF Sites</h1>
-            <p>Добро пожаловать на новый сайт!</p>
-        </body>
+        <body><h1>⚡ HF Sites</h1><p>Добро пожаловать на новый сайт!</p></body>
         </html>`;
             customId.value = '';
             editingProjectId = null;
@@ -1383,29 +583,19 @@
             setTimeout(() => resultDiv.style.display = 'none', 2000);
         }
 
-        // ─── ПОКАЗ РЕЗУЛЬТАТА ───
         function showResult(message, type) {
             resultDiv.className = type || '';
             resultDiv.innerHTML = message;
             resultDiv.style.display = 'block';
-            if (!type) {
-                resultDiv.style.display = 'none';
-            }
+            if (!type) resultDiv.style.display = 'none';
         }
 
         // ─── АВТОСОХРАНЕНИЕ ───
-        codeTextarea.addEventListener('input', () => {
-            localStorage.setItem('hf_sites_code', codeTextarea.value);
-        });
-        siteName.addEventListener('input', () => {
-            localStorage.setItem('hf_sites_name', siteName.value);
-        });
-
+        codeTextarea.addEventListener('input', () => localStorage.setItem('hf_sites_code', codeTextarea.value));
+        siteName.addEventListener('input', () => localStorage.setItem('hf_sites_name', siteName.value));
         const savedCode = localStorage.getItem('hf_sites_code');
-        if (savedCode) {
-            codeTextarea.value = savedCode;
-            updateVisualFromCode();
-        }
+        if (savedCode) { codeTextarea.value = savedCode;
+            updateVisualFromCode(); }
         const savedName = localStorage.getItem('hf_sites_name');
         if (savedName) siteName.value = savedName;
 
